@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iterms.dao.Tb_ipsDao">
+<sql id="con" >
+tb_ips.id, tb_ips.platform, tb_ips.pipe, tb_ips.engine, tb_ips.gearbox, tb_ips.ipstime, tb_ips.excel, tb_ips.cadjpg, tb_ips.riskpartid, 
+tb_ips.inputsource, tb_ips.ipsjpg, tb_ips.ipsfile, tb_ips.dmuins, tb_ips.minins, tb_ips.pmujpg, tb_ips.pmuins, 
+tb_ips.pmusitu, tb_ips.carid, tb_ips.ojpg, tb_ips.tm, tb_ips.dreijpg, tb_ips.antm, tb_ips.sechsjpg, 
+tb_ips.anriskpartid, tb_ips.nuenjpg, tb_ips.ipssolu, tb_ips.finaljpg, tb_ips.simojpg, tb_ips.simoins, 
+tb_ips.simminins, tb_ips.simsitu, tb_ips.aekoid, tb_ips.aekofile, tb_ips.aekocom, tb_ips.aekositu, 
+tb_ips.tb_task_id, tb_task.taskname,tb_ips.tb_node_id,
+tb_exceldata.project,tb_exceldata.name,tb_ips.tb_users_id,tb_users.uname
+</sql>
+<select id="getById" parameterType="Integer" resultType="com.iterms.been.Tb_ips">
+	select <include refid="con"></include>from tb_ips,tb_task,tb_users,tb_exceldata where tb_ips.id=#{id} and  tb_ips.tb_users_id=tb_users.id and tb_ips.tb_task_id=tb_task.id and tb_ips.tb_node_id=tb_exceldata.id
+</select>
+<!-- 添加 -->
+	<insert id="insert" parameterType="com.iterms.been.Tb_ips">
+		insert into tb_ips 
+			<trim prefix="(" suffix=")" suffixOverrides=","> 
+				<if test="id!=null and id!=0">id,</if> 
+				<if test="platform!=null and platform!=''">platform,</if> 
+				<if test="pipe!=null and pipe!=''">pipe,</if> 
+				<if test="engine!=null and engine!=''">engine,</if>
+				<if test="gearbox!=null and gearbox!=''">gearbox,</if>
+				<if test="ipstime!=null and ipstime!=''">ipstime,</if> 
+				<if test="excel!=null and excel!=''">excel,</if> 
+				<if test="cadjpg!=null and cadjpg!=''">cadjpg,</if>
+				<if test="riskpartid!=null and riskpartid!=''">riskpartid,</if> 
+				<if test="inputsource!=null and inputsource!=''">inputsource,</if>
+				<if test="ipsjpg!=null and ipsjpg!=''">ipsjpg,</if> 
+				<if test="ipsfile!=null and ipsfile!=''">ipsfile,</if> 
+				<if test="pmujpg!=null and pmujpg!=''">pmujpg,</if> 
+				<if test="pmusitu!=null and pmusitu!=''">pmusitu,</if>
+				<if test="carid!=null and carid!=''">carid,</if> 
+				<if test="ojpg!=null and ojpg!=''">ojpg,</if>
+				<if test="tm!=null and tm!=''">tm,</if>
+				<if test="dreijpg!=null and dreijpg!=''">dreijpg,</if>
+				<if test="antm!=null and antm!=''">antm,</if>
+				<if test="sechsjpg!=null and sechsjpg!=''">sechsjpg,</if>
+				<if test="anriskpartid!=null and anriskpartid!=''">anriskpartid,</if>
+				<if test="nuenjpg!=null and nuenjpg!=''">nuenjpg,</if>
+				<if test="ipssolu!=null and ipssolu!=''">ipssolu,</if>
+				<if test="finaljpg!=null and finaljpg!=''">finaljpg,</if>
+				<if test="simojpg!=null and simojpg!=''">simojpg,</if>
+				<if test="simsitu!=null and simsitu!=''">simsitu,</if>
+				<if test="aekoid!=null and aekoid!=''">aekoid,</if>
+				<if test="aekofile!=null and aekofile!=''">aekofile,</if>
+				<if test="aekocom!=null and aekocom!=''">aekocom,</if>
+				<if test="aekositu!=null and aekositu!=''">aekositu,</if>
+				<if test="dmuins!=null and dmuins!=''">dmuins,</if> 
+				<if test="minins!=null and minins!=''">minins,</if> 
+				<if test="pmuins!=null and pmuins!=''">pmuins,</if>
+				<if test="simoins!=null and simoins!=''">simoins,</if>
+				<if test="simminins!=null and simminins!=''">simminins,</if>   
+				<if test="tb_users_id!=null and tb_users_id!=0">tb_users_id,</if> 
+				<if test="tb_task_id!=null and tb_task_id!=0">tb_task_id,</if> 
+				<if test="tb_node_id!=null and tb_node_id!=0">tb_node_id,</if> 
+			</trim> 
+		values 
+			<trim prefix="(" suffix=")" suffixOverrides=","> 
+				<if test="id!=null and id!=0">#{id},</if> 
+				<if test="platform!=null and platform!=''">#{platform},</if> 
+				<if test="pipe!=null and pipe!=''">#{pipe},</if> 
+				<if test="engine!=null and engine!=''">#{engine},</if> 
+				<if test="gearbox!=null and gearbox!=''">#{gearbox},</if> 
+				<if test="ipstime!=null and ipstime!=''">#{ipstime},</if>
+				<if test="excel!=null and excel!=''">#{excel},</if> 
+				<if test="cadjpg!=null and cadjpg!=''">#{cadjpg},</if> 
+				<if test="riskpartid!=null and riskpartid!=''">#{riskpartid},</if> 
+				<if test="inputsource!=null and inputsource!=''">#{inputsource},</if> 
+				<if test="ipsjpg!=null and ipsjpg!=''">#{ipsjpg},</if> 
+				<if test="ipsfile!=null and ipsfile!=''">#{ipsfile},</if> 
+				<if test="pmujpg!=null and pmujpg!=''">#{pmujpg},</if> 
+				<if test="pmusitu!=null and pmusitu!=''">#{pmusitu},</if> 
+				<if test="carid!=null and carid!=''">#{carid},</if>  
+				<if test="ojpg!=null and ojpg!=''">#{ojpg},</if> 
+				<if test="tm!=null and tm!=''">#{tm},</if>
+				<if test="dreijpg!=null and dreijpg!=''">#{dreijpg},</if>
+				<if test="antm!=null and antm!=''">#{antm},</if>
+				<if test="sechsjpg!=null and sechsjpg!=''">#{sechsjpg},</if>
+				<if test="anriskpartid!=null and anriskpartid!=''">#{anriskpartid},</if>
+				<if test="nuenjpg!=null and nuenjpg!=''">#{nuenjpg},</if>
+				<if test="ipssolu!=null and ipssolu!=''">#{ipssolu},</if>
+				<if test="finaljpg!=null and finaljpg!=''">#{finaljpg},</if>
+				<if test="simojpg!=null and simojpg!=''">#{simojpg},</if>
+				<if test="simsitu!=null and simsitu!=''">#{simsitu},</if>
+				<if test="aekoid!=null and aekoid!=''">#{aekoid},</if>
+				<if test="aekofile!=null and aekofile!=''">#{aekofile},</if>
+				<if test="aekocom!=null and aekocom!=''">#{aekocom},</if>
+				<if test="aekositu!=null and aekositu!=''">#{aekositu},</if> 
+				<if test="dmuins!=null and dmuins!=''">#{dmuins},</if>
+				<if test="minins!=null and minins!=''">#{minins},</if>
+				<if test="pmuins!=null and pmuins!=''">#{pmuins},</if>
+				<if test="simoins!=null and simoins!=''">#{simoins},</if>
+				<if test="simminins!=null and simminins!=''">#{simminins},</if>
+				<if test="tb_users_id!=null and tb_users_id!=0">#{tb_users_id},</if> 
+				<if test="tb_task_id!=null and tb_task_id!=0">#{tb_task_id},</if>  
+				<if test="tb_node_id!=null and tb_node_id!=0">#{tb_node_id},</if> 
+			</trim> 
+			<selectKey resultType="java.lang.Integer" order="AFTER"
+	            keyProperty="id">
+	            SELECT LAST_INSERT_ID()
+	         </selectKey>
+	</insert>
+	
+	<delete id="delete" parameterType="com.iterms.been.Tb_ips">
+		delete from tb_ips where id=#{id}
+	</delete>
+	
+	<select id="getPage" resultType="com.iterms.been.Tb_ips">
+		select <include refid="con"></include> from tb_ips,tb_users,tb_task,tb_exceldata where 1=1  and  tb_ips.tb_users_id=tb_users.id  and tb_ips.tb_task_id=tb_task.id and tb_ips.tb_node_id=tb_exceldata.id
+		<if test="id!=null and id!=0">
+			and id=#{id} 
+		</if>
+		<if test="platform!=null and platform!=''">
+			and platform like "%"#{platform}"%" 
+		</if>
+		<if test="pipe!=null and pipe!=''">
+			and pipe like "%"#{pipe}"%" 
+		</if>
+		<if test="engine!=null and engine!=''">
+			and engine like "%"#{engine}"%" 
+		</if>
+		<if test="gearbox!=null and gearbox!=''">
+			and gearbox like "%"#{gearbox}"%" 
+		</if>
+		<if test="excel!=null and excel!=''">
+			and excel like "%"#{excel}"%" 
+		</if>
+		<if test="cadjpg!=null and cadjpg!=''">
+			and cadjpg like "%"#{cadjpg}"%" 
+		</if>
+		<if test="riskpartid!=null and riskpartid!=''">
+			and riskpartid like "%"#{riskpartid}"%" 
+		</if>
+		<if test="inputsource!=null and inputsource!=''">
+			and inputsource like "%"#{inputsource}"%" 
+		</if>
+		<if test="ipsjpg!=null and ipsjpg!=''">
+			and ipsjpg like "%"#{ipsjpg}"%" 
+		</if>
+		<if test="ipsfile!=null and ipsfile!=''">
+			and ipsfile like "%"#{ipsfile}"%" 
+		</if>
+		<if test="pmujpg!=null and pmujpg!=''">
+			and pmujpg like "%"#{pmujpg}"%" 
+		</if>
+		<if test="pmusitu!=null and pmusitu!=''">
+			and pmusitu like "%"#{pmusitu}"%" 
+		</if>
+		<if test="carid!=null and carid!=''">
+			and carid like "%"#{carid}"%" 
+		</if>
+		<if test="ojpg!=null and ojpg!=''">
+			and ojpg like "%"#{ojpg}"%" 
+		</if>
+		<if test="tm!=null and tm!=''">
+			and tm like "%"#{tm}"%" 
+		</if>
+		<if test="dreijpg!=null and dreijpg!=''">
+			and dreijpg like "%"#{dreijpg}"%" 
+		</if>
+		<if test="antm!=null and antm!=''">
+			and antm like "%"#{antm}"%" 
+		</if>
+		<if test="sechsjpg!=null and sechsjpg!=''">
+			and sechsjpg like "%"#{sechsjpg}"%" 
+		</if>
+		<if test="anriskpartid!=null and anriskpartid!=''">
+			and anriskpartid like "%"#{anriskpartid}"%" 
+		</if>
+		<if test="nuenjpg!=null and nuenjpg!=''">
+			and nuenjpg like "%"#{nuenjpg}"%" 
+		</if>
+		<if test="ipssolu!=null and ipssolu!=''">
+			and ipssolu like "%"#{ipssolu}"%" 
+		</if>
+		<if test="finaljpg!=null and finaljpg!=''">
+			and finaljpg like "%"#{finaljpg}"%" 
+		</if>
+		<if test="simojpg!=null and simojpg!=''">
+			and simojpg like "%"#{simojpg}"%" 
+		</if>
+		<if test="simsitu!=null and simsitu!=''">
+			and simsitu like "%"#{simsitu}"%" 
+		</if>
+		<if test="aekoid!=null and aekoid!=''">
+			and aekoid like "%"#{aekoid}"%" 
+		</if>
+		<if test="aekofile!=null and aekofile!=''">
+			and aekofile like "%"#{aekofile}"%" 
+		</if>
+		<if test="aekocom!=null and aekocom!=''">
+			and aekocom like "%"#{aekocom}"%" 
+		</if>
+		<if test="aekositu!=null and aekositu!=''">
+			and aekositu like "%"#{aekositu}"%" 
+		</if>
+		<if test="dmuins!=null and dmuins!=''">
+			and dmuins like "%"#{dmuins}"%" 
+		</if>
+		<if test="minins!=null and minins!=''">
+			and minins like "%"#{minins}"%" 
+		</if>
+		<if test="pmuins!=null and pmuins!=''">
+			and pmuins like "%"#{pmuins}"%" 
+		</if>
+		<if test="simoins!=null and simoins!=''">
+			and simoins like "%"#{simoins}"%" 
+		</if>
+		<if test="simminins!=null and simminins!=''">
+			and simminins like "%"#{simminins}"%" 
+		</if>
+		<if test="tb_users_id!=null and tb_users_id!=0">
+			and tb_users_id=#{tb_users_id} 
+		</if>
+		<if test="tb_task_id!=null and tb_task_id!=0">
+			and tb_task_id=#{tb_task_id} 
+		</if>
+		<if test="tb_node_id!=null and tb_node_id!=0">
+			and tb_node_id=#{tb_node_id} 
+		</if>
+		<if test="ipstime!=null and ipstime!=''">
+			and ipstime like "%"#{ipstime}"%" 
+		</if>
+		<if test="sindex!=null and scount!=null">
+			limit #{sindex},#{scount}
+		</if>
+	</select>
+	
+	<select id="getAllCount" resultType="int">
+		select count(tb_ips.id) from tb_ips,tb_users,tb_task,tb_exceldata where 1=1  and tb_ips.tb_users_id=tb_users.id and tb_ips.tb_task_id=tb_task.id and tb_ips.tb_node_id=tb_exceldata.id
+		<if test="id!=null and id!=0">
+			and id=#{id} 
+		</if>
+		<if test="platform!=null and platform!=''">
+			and platform like "%"#{platform}"%" 
+		</if>
+		<if test="pipe!=null and pipe!=''">
+			and pipe like "%"#{pipe}"%" 
+		</if>
+		<if test="engine!=null and engine!=''">
+			and engine like "%"#{engine}"%" 
+		</if>
+		<if test="gearbox!=null and gearbox!=''">
+			and gearbox like "%"#{gearbox}"%" 
+		</if>
+		<if test="excel!=null and excel!=''">
+			and excel like "%"#{excel}"%" 
+		</if>
+		<if test="cadjpg!=null and cadjpg!=''">
+			and cadjpg like "%"#{cadjpg}"%" 
+		</if>
+		<if test="riskpartid!=null and riskpartid!=''">
+			and riskpartid like "%"#{riskpartid}"%" 
+		</if>
+		<if test="inputsource!=null and inputsource!=''">
+			and inputsource like "%"#{inputsource}"%" 
+		</if>
+		<if test="ipsjpg!=null and ipsjpg!=''">
+			and ipsjpg like "%"#{ipsjpg}"%" 
+		</if>
+		<if test="ipsfile!=null and ipsfile!=''">
+			and ipsfile like "%"#{ipsfile}"%" 
+		</if>
+		<if test="pmujpg!=null and pmujpg!=''">
+			and pmujpg like "%"#{pmujpg}"%" 
+		</if>
+		<if test="pmuins!=null and pmuins!=''">
+			and pmuins like "%"#{pmuins}"%" 
+		</if>
+		<if test="pmusitu!=null and pmusitu!=''">
+			and pmusitu like "%"#{pmusitu}"%" 
+		</if>
+		<if test="carid!=null and carid!=''">
+			and carid like "%"#{carid}"%" 
+		</if>
+		<if test="ojpg!=null and ojpg!=''">
+			and ojpg like "%"#{ojpg}"%" 
+		</if>
+		<if test="tm!=null and tm!=''">
+			and tm like "%"#{tm}"%" 
+		</if>
+		<if test="dreijpg!=null and dreijpg!=''">
+			and dreijpg like "%"#{dreijpg}"%" 
+		</if>
+		<if test="antm!=null and antm!=''">
+			and antm like "%"#{antm}"%" 
+		</if>
+		<if test="sechsjpg!=null and sechsjpg!=''">
+			and sechsjpg like "%"#{sechsjpg}"%" 
+		</if>
+		<if test="anriskpartid!=null and anriskpartid!=''">
+			and anriskpartid like "%"#{anriskpartid}"%" 
+		</if>
+		<if test="nuenjpg!=null and nuenjpg!=''">
+			and nuenjpg like "%"#{nuenjpg}"%" 
+		</if>
+		<if test="ipssolu!=null and ipssolu!=''">
+			and ipssolu like "%"#{ipssolu}"%" 
+		</if>
+		<if test="finaljpg!=null and finaljpg!=''">
+			and finaljpg like "%"#{finaljpg}"%" 
+		</if>
+		<if test="simojpg!=null and simojpg!=''">
+			and simojpg like "%"#{simojpg}"%" 
+		</if>
+		<if test="simsitu!=null and simsitu!=''">
+			and simsitu like "%"#{simsitu}"%" 
+		</if>
+		<if test="aekoid!=null and aekoid!=''">
+			and aekoid like "%"#{aekoid}"%" 
+		</if>
+		<if test="aekofile!=null and aekofile!=''">
+			and aekofile like "%"#{aekofile}"%" 
+		</if>
+		<if test="aekocom!=null and aekocom!=''">
+			and aekocom like "%"#{aekocom}"%" 
+		</if>
+		<if test="aekositu!=null and aekositu!=''">
+			and aekositu like "%"#{aekositu}"%" 
+		</if>
+		<if test="dmuins!=null and dmuins!=''">
+			and dmuins like "%"#{dmuins}"%"
+		</if>
+		<if test="minins!=null and minins!=''">
+			and minins like "%"#{minins}"%" 
+		</if>
+		<if test="pmuins!=null and pmuins!=''">
+			and pmuins like "%"#{pmuins}"%" 
+		</if>
+		<if test="simoins!=null and simoins!=''">
+			and simoins like "%"#{simoins}"%" 
+		</if>
+		<if test="simminins!=null and simminins!=''">
+			and simminins like "%"#{simminins}"%" 
+		</if>
+		
+		<if test="tb_users_id!=null and tb_users_id!=0">
+			and tb_users_id=#{tb_users_id} 
+		</if>
+		<if test="tb_task_id!=null and tb_task_id!=0">
+			and tb_task_id=#{tb_task_id} 
+		</if>
+		<if test="tb_node_id!=null and tb_node_id!=0">
+			and tb_node_id=#{tb_node_id} 
+		</if>
+		<if test="ipstime!=null and ipstime!=''">
+			and ipstime like "%"#{ipstime}"%" 
+		</if>
+	</select>
+	
+</mapper>

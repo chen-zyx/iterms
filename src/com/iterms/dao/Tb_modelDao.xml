@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iterms.dao.Tb_modelDao">
+	<sql id="con">
+		tb_model.id,tb_model.mname,tb_model.mfile,tb_model.mattr,tb_model.tb_iterms_id,tb_iterms.itname,tb_iterms.itmark,tb_model.tb_users_id,tb_users.uno,tb_users.uname,tb_users.uemail,tb_users.upwd,tb_users.uflag,tb_users.upnums,tb_users.dnums,tb_users.utype,tb_model.ctime,tb_model.tb_node_id,tb_node.nodename,tb_model.tb_zweit_id,tb_zweit.zweitname 
+	</sql>
+	<!-- 根据id获取对象 -->
+	<select id="getById" parameterType="Integer" resultType="com.iterms.been.Tb_model">
+		select <include refid="con"></include> from tb_model,tb_iterms,tb_users,tb_node,tb_zweit where  tb_model.id=#{id}  and tb_model.tb_iterms_id=tb_iterms.id  and tb_model.tb_users_id=tb_users.id and tb_model.tb_node_id=tb_node.id and tb_model.tb_zweit_id=tb_zweit.id
+	</select>
+	<!-- 修改 -->
+	<update id="update" parameterType="com.iterms.been.Tb_model">
+		update tb_model set 
+			<trim suffixOverrides=","> 
+				<if test="id!=null and id!=0"> 
+					id = #{id}, 
+				</if> 
+				<if test="mname!=null and mname!=''"> 
+					mname = #{mname}, 
+				</if> 
+				<if test="mfile!=null and mfile!=''"> 
+					mfile = #{mfile}, 
+				</if> 
+				<if test="mattr!=null and mattr!=''"> 
+					mattr = #{mattr}, 
+				</if> 
+				<if test="tb_iterms_id!=null and tb_iterms_id!=0"> 
+					tb_iterms_id = #{tb_iterms_id}, 
+				</if> 
+				<if test="tb_users_id!=null and tb_users_id!=0"> 
+					tb_users_id = #{tb_users_id}, 
+				</if> 
+				<if test="tb_zweit_id!=null and tb_zweit_id!=0"> 
+					tb_zweit_id = #{tb_zweit_id}, 
+				</if> 
+				<if test="tb_node_id!=null and tb_node_id!=0"> 
+					tb_node_id = #{tb_node_id}, 
+				</if> 
+				<if test="ctime!=null and ctime!=''"> 
+					ctime = #{ctime}, 
+				</if> 
+			</trim> 
+		where id = #{id}  
+	</update>
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.iterms.been.Tb_model">
+		insert into tb_model 
+			<trim prefix="(" suffix=")" suffixOverrides=","> 
+				<if test="id!=null and id!=0">id,</if> 
+				<if test="mname!=null and mname!=''">mname,</if> 
+				<if test="mfile!=null and mfile!=''">mfile,</if> 
+				<if test="mattr!=null and mattr!=''">mattr,</if> 
+				<if test="tb_iterms_id!=null and tb_iterms_id!=0">tb_iterms_id,</if> 
+				<if test="tb_users_id!=null and tb_users_id!=0">tb_users_id,</if> 
+				<if test="tb_zweit_id!=null and tb_zweit_id!=0">tb_zweit_id,</if> 
+				<if test="tb_node_id!=null and tb_node_id!=0">tb_node_id,</if> 
+				<if test="ctime!=null and ctime!=''">ctime,</if> 
+			</trim> 
+		values 
+			<trim prefix="(" suffix=")" suffixOverrides=","> 
+								<if test="id!=null and id!=0">#{id},</if> 
+				<if test="mname!=null and mname!=''">#{mname},</if> 
+				<if test="mfile!=null and mfile!=''">#{mfile},</if> 
+				<if test="mattr!=null and mattr!=''">#{mattr},</if> 
+				<if test="tb_iterms_id!=null and tb_iterms_id!=0">#{tb_iterms_id},</if> 
+				<if test="tb_users_id!=null and tb_users_id!=0">#{tb_users_id},</if> 
+				<if test="tb_zweit_id!=null and tb_zweit_id!=0">#{tb_zweit_id},</if> 
+				<if test="tb_node_id!=null and tb_node_id!=0">#{tb_node_id},</if> 
+				<if test="ctime!=null and ctime!=''">#{ctime},</if> 
+ 
+			</trim> 
+			<selectKey resultType="java.lang.Integer" order="AFTER"
+	            keyProperty="id">
+	            SELECT LAST_INSERT_ID()
+	         </selectKey>
+	</insert>
+	<!-- 删除 -->
+	<delete id="delete" parameterType="com.iterms.been.Tb_model">
+		delete from tb_model where id=#{id}
+	</delete>
+	<!-- 根据不同条件，获取信息 -->
+	<select id="getPage" resultType="com.iterms.been.Tb_model">
+		select <include refid="con"></include> from tb_model,tb_iterms,tb_users,tb_node,tb_zweit where 1=1  and tb_model.tb_iterms_id=tb_iterms.id  and tb_model.tb_users_id=tb_users.id and tb_model.tb_node_id=tb_node.id and tb_model.tb_zweit_id=tb_zweit.id
+		<if test="id!=null and id!=0">
+			and id=#{id} 
+		</if>
+		<if test="mname!=null and mname!=''">
+			and mname like "%"#{mname}"%" 
+		</if>
+		<if test="mfile!=null and mfile!=''">
+			and mfile like "%"#{mfile}"%" 
+		</if>
+		<if test="mattr!=null and mattr!=''">
+			and mattr like "%"#{mattr}"%" 
+		</if>
+		<if test="tb_iterms_id!=null and tb_iterms_id!=0">
+			and tb_iterms_id=#{tb_iterms_id} 
+		</if>
+		<if test="tb_users_id!=null and tb_users_id!=0">
+			and tb_users_id=#{tb_users_id} 
+		</if>
+		<if test="tb_zweit_id!=null and tb_zweit_id!=0">
+			and tb_zweit_id=#{tb_zweit_id} 
+		</if>
+		<if test="tb_node_id!=null and tb_node_id!=0">
+			and tb_node_id=#{tb_node_id} 
+		</if>
+		<if test="ctime!=null and ctime!=''">
+			and ctime like "%"#{ctime}"%" 
+		</if>
+		<if test="sindex!=null and scount!=null">
+			limit #{sindex},#{scount}
+		</if>
+	</select>
+	<!-- 获取总条数 -->
+	<select id="getAllCount" resultType="int">
+		select count(tb_model.id) from tb_model,tb_iterms,tb_users,tb_node,tb_zweit where 1=1  and tb_model.tb_iterms_id=tb_iterms.id  and tb_model.tb_users_id=tb_users.id and tb_model.tb_node_id=tb_node.id and tb_model.tb_zweit_id=tb_zweit.id
+		<if test="id!=null and id!=0">
+			and id=#{id} 
+		</if>
+		<if test="mname!=null and mname!=''">
+			and mname like "%"#{mname}"%" 
+		</if>
+		<if test="mfile!=null and mfile!=''">
+			and mfile like "%"#{mfile}"%" 
+		</if>
+		<if test="mattr!=null and mattr!=''">
+			and mattr like "%"#{mattr}"%" 
+		</if>
+		<if test="tb_iterms_id!=null and tb_iterms_id!=0">
+			and tb_iterms_id=#{tb_iterms_id} 
+		</if>
+		<if test="tb_users_id!=null and tb_users_id!=0">
+			and tb_users_id=#{tb_users_id} 
+		</if>
+		<if test="tb_zweit_id!=null and tb_zweit_id!=0">
+			and tb_zweit_id=#{tb_zweit_id} 
+		</if>
+		<if test="tb_node_id!=null and tb_node_id!=0">
+			and tb_node_id=#{tb_node_id} 
+		</if>
+		<if test="ctime!=null and ctime!=''">
+			and ctime like "%"#{ctime}"%" 
+		</if>
+	</select>
+</mapper>

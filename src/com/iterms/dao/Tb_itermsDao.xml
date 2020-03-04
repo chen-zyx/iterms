@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iterms.dao.Tb_itermsDao">
+	<sql id="con">
+		tb_iterms.id,tb_iterms.itname,tb_iterms.itmark,tb_iterms.kla,tb_iterms.projekt,tb_iterms.bezeichnung 
+	</sql>
+	<!-- 根据id获取对象 -->
+	<select id="getById" parameterType="Integer" resultType="com.iterms.been.Tb_iterms">
+		select <include refid="con"></include> from tb_iterms where  tb_iterms.id=#{id} 
+	</select>
+	<!-- 修改 -->
+	<update id="update" parameterType="com.iterms.been.Tb_iterms">
+		update tb_iterms set 
+			<trim suffixOverrides=","> 
+				<if test="id!=null and id!=0"> 
+					id = #{id}, 
+				</if> 
+				<if test="itname!=null and itname!=''"> 
+					itname = #{itname}, 
+				</if> 
+				<if test="itmark!=null and itmark!=''"> 
+					itmark = #{itmark}, 
+				</if> 
+				<if test="kla!=null and kla!=''"> 
+					kla = #{kla}, 
+				</if> 
+				<if test="projekt!=null and projekt!=''"> 
+					projekt = #{projekt}, 
+				</if> 
+				<if test="bezeichnung!=null and bezeichnung!=''"> 
+					bezeichnung = #{bezeichnung}, 
+				</if> 
+			</trim> 
+		where id = #{id}  
+	</update>
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.iterms.been.Tb_iterms">
+		insert into tb_iterms 
+			<trim prefix="(" suffix=")" suffixOverrides=","> 
+				<if test="id!=null and id!=0">id,</if> 
+				<if test="itname!=null and itname!=''">itname,</if> 
+				<if test="itmark!=null and itmark!=''">itmark,</if>
+				<if test="kla!=null and kla!=''">kla,</if> 
+				<if test="projekt!=null and projekt!=''">projekt,</if>
+				<if test="bezeichnung!=null and bezeichnung!=''">bezeichnung,</if>
+			</trim> 
+		values 
+			<trim prefix="(" suffix=")" suffixOverrides=","> 
+								<if test="id!=null and id!=0">#{id},</if> 
+				<if test="itname!=null and itname!=''">#{itname},</if> 
+				<if test="itmark!=null and itmark!=''">#{itmark},</if>
+				<if test="kla!=null and kla!=''">#{kla},</if> 
+				<if test="projekt!=null and projekt!=''">#{projekt},</if>
+				<if test="bezeichnung!=null and bezeichnung!=''">#{bezeichnung},</if>
+ 
+			</trim> 
+	</insert>
+	<!-- 删除 -->
+	<delete id="delete" parameterType="com.iterms.been.Tb_iterms">
+		delete from tb_iterms where id=#{id}
+	</delete>
+	<!-- 根据不同条件，获取信息 -->
+	<select id="getPage" resultType="com.iterms.been.Tb_iterms">
+		select <include refid="con"></include> from tb_iterms where 1=1 
+		<if test="id!=null and id!=0">
+			and id=#{id} 
+		</if>
+		<if test="itname!=null and itname!=''">
+			and itname like "%"#{itname}"%" 
+		</if>
+		<if test="itmark!=null and itmark!=''">
+			and itmark like "%"#{itmark}"%" 
+		</if>
+		<if test="kla!=null and kla!=''">
+			and kla like "%"#{kla}"%" 
+		</if>
+		<if test="bezeichnung!=null and bezeichnung!=''">
+			and bezeichnung like "%"#{bezeichnung}"%" 
+		</if>
+		<if test="projekt!=null and projekt!=''">
+			and projekt like "%"#{projekt}"%" 
+		</if>
+		<if test="sindex!=null and scount!=null">
+			limit #{sindex},#{scount}
+		</if>
+	</select>
+	<!-- 获取总条数 -->
+	<select id="getAllCount" resultType="int">
+		select count(tb_iterms.id) from tb_iterms where 1=1 
+		<if test="id!=null and id!=0">
+			and id=#{id} 
+		</if>
+		<if test="itname!=null and itname!=''">
+			and itname like "%"#{itname}"%" 
+		</if>
+		<if test="itmark!=null and itmark!=''">
+			and itmark like "%"#{itmark}"%" 
+		</if>
+		<if test="kla!=null and kla!=''">
+			and kla like "%"#{kla}"%" 
+		</if>
+		<if test="bezeichnung!=null and bezeichnung!=''">
+			and bezeichnung like "%"#{bezeichnung}"%" 
+		</if>
+		<if test="projekt!=null and projekt!=''">
+			and projekt like "%"#{projekt}"%" 
+		</if>
+		<if test="sindex!=null and scount!=null">
+			limit #{sindex},#{scount}
+		</if>
+	</select>
+</mapper>

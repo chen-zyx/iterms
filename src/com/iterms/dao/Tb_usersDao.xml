@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iterms.dao.Tb_usersDao">
+	<sql id="con">
+		tb_users.id,tb_users.uno,tb_users.uname,tb_users.uemail,tb_users.upwd,tb_users.uflag,tb_users.upnums,tb_users.dnums,tb_users.utype 
+	</sql>
+	<!-- 根据id获取对象 -->
+	<select id="getById" parameterType="Integer" resultType="com.iterms.been.Tb_users">
+		select <include refid="con"></include> from tb_users where  tb_users.id=#{id} 
+	</select>
+	<!-- 修改 -->
+	<update id="update" parameterType="com.iterms.been.Tb_users">
+		update tb_users set 
+			<trim suffixOverrides=","> 
+				<if test="id!=null and id!=0"> 
+					id = #{id}, 
+				</if> 
+				<if test="uno!=null and uno!=''"> 
+					uno = #{uno}, 
+				</if> 
+				<if test="uname!=null and uname!=''"> 
+					uname = #{uname}, 
+				</if> 
+				<if test="uemail!=null and uemail!=''"> 
+					uemail = #{uemail}, 
+				</if> 
+				<if test="upwd!=null and upwd!=''"> 
+					upwd = #{upwd}, 
+				</if> 
+				<if test="uflag!=null and uflag!=''"> 
+					uflag = #{uflag}, 
+				</if> 
+				<if test="upnums!=null and upnums!=0"> 
+					upnums = #{upnums}, 
+				</if> 
+				<if test="dnums!=null and dnums!=0"> 
+					dnums = #{dnums}, 
+				</if> 
+				<if test="utype!=null and utype!=''"> 
+					utype = #{utype}, 
+				</if> 
+			</trim> 
+		where id = #{id}  
+	</update>
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.iterms.been.Tb_users">
+		insert into tb_users 
+			<trim prefix="(" suffix=")" suffixOverrides=","> 
+				<if test="id!=null and id!=0">id,</if> 
+				<if test="uno!=null and uno!=''">uno,</if> 
+				<if test="uname!=null and uname!=''">uname,</if> 
+				<if test="uemail!=null and uemail!=''">uemail,</if> 
+				<if test="upwd!=null and upwd!=''">upwd,</if> 
+				<if test="uflag!=null and uflag!=''">uflag,</if> 
+				<if test="upnums!=null and upnums!=0">upnums,</if> 
+				<if test="dnums!=null and dnums!=0">dnums,</if> 
+				<if test="utype!=null and utype!=''">utype,</if> 
+			</trim> 
+		values 
+			<trim prefix="(" suffix=")" suffixOverrides=","> 
+								<if test="id!=null and id!=0">#{id},</if> 
+				<if test="uno!=null and uno!=''">#{uno},</if> 
+				<if test="uname!=null and uname!=''">#{uname},</if> 
+				<if test="uemail!=null and uemail!=''">#{uemail},</if> 
+				<if test="upwd!=null and upwd!=''">#{upwd},</if> 
+				<if test="uflag!=null and uflag!=''">#{uflag},</if> 
+				<if test="upnums!=null and upnums!=0">#{upnums},</if> 
+				<if test="dnums!=null and dnums!=0">#{dnums},</if> 
+				<if test="utype!=null and utype!=''">#{utype},</if> 
+ 
+			</trim> 
+	</insert>
+	<!-- 删除 -->
+	<delete id="delete" parameterType="com.iterms.been.Tb_users">
+		delete from tb_users where id=#{id}
+	</delete>
+	<!-- 根据不同条件，获取信息 -->
+	<select id="getPage" resultType="com.iterms.been.Tb_users">
+		select <include refid="con"></include> from tb_users where 1=1 
+		<if test="id!=null and id!=0">
+			and id=#{id} 
+		</if>
+		<if test="uno!=null and uno!=''">
+			and uno like "%"#{uno}"%" 
+		</if>
+		<if test="uname!=null and uname!=''">
+			and uname like "%"#{uname}"%" 
+		</if>
+		<if test="uemail!=null and uemail!=''">
+			and uemail like "%"#{uemail}"%" 
+		</if>
+		<if test="upwd!=null and upwd!=''">
+			and upwd like "%"#{upwd}"%" 
+		</if>
+		<if test="uflag!=null and uflag!=''">
+			and uflag like "%"#{uflag}"%" 
+		</if>
+		<if test="upnums!=null and upnums!=0">
+			and upnums=#{upnums} 
+		</if>
+		<if test="dnums!=null and dnums!=0">
+			and dnums=#{dnums} 
+		</if>
+		<if test="utype!=null and utype!=''">
+			and utype like "%"#{utype}"%" 
+		</if>
+		<if test="sindex!=null and scount!=null">
+			limit #{sindex},#{scount}
+		</if>
+	</select>
+	<!-- 获取总条数 -->
+	<select id="getAllCount" resultType="int">
+		select count(tb_users.id) from tb_users where 1=1 
+		<if test="id!=null and id!=0">
+			and id=#{id} 
+		</if>
+		<if test="uno!=null and uno!=''">
+			and uno like "%"#{uno}"%" 
+		</if>
+		<if test="uname!=null and uname!=''">
+			and uname like "%"#{uname}"%" 
+		</if>
+		<if test="uemail!=null and uemail!=''">
+			and uemail like "%"#{uemail}"%" 
+		</if>
+		<if test="upwd!=null and upwd!=''">
+			and upwd like "%"#{upwd}"%" 
+		</if>
+		<if test="uflag!=null and uflag!=''">
+			and uflag like "%"#{uflag}"%" 
+		</if>
+		<if test="upnums!=null and upnums!=0">
+			and upnums=#{upnums} 
+		</if>
+		<if test="dnums!=null and dnums!=0">
+			and dnums=#{dnums} 
+		</if>
+		<if test="utype!=null and utype!=''">
+			and utype like "%"#{utype}"%" 
+		</if>
+	</select>
+</mapper>

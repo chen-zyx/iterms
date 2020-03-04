@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iterms.dao.Tb_messageDao">
+	<sql id="con">
+		tb_message.id,tb_message.sender,tb_message.receiver,tb_message.title,tb_message.content,tb_message.status,tb_message.sendstatus,tb_message.createtime
+	</sql>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.iterms.been.Tb_message">
+		insert into tb_message
+		(id,sender,receiver,title,content,createtime)
+
+		values (#{id},#{sender},#{receiver},#{title},#{content},#{createtime})
+
+	</insert>
+	<update id="update" parameterType="com.iterms.been.Tb_message">
+		update tb_message set
+		<trim suffixOverrides=",">
+			<if test="id!=null and id!=0">
+				id = #{id},
+			</if>
+			<if test="sender!=null and sender!=''">
+				sender = #{sender},
+			</if>
+			<if test="receiver!=null and receiver!=''">
+				receiver = #{receiver},
+			</if>
+			<if test="title!=null and title!=''">
+				title = #{title},
+			</if>
+			<if test="status!=null and status!=''">
+				status=#{status},
+			</if>
+			<if test="sendstatus!=null and sendstatus!=''">
+				sendstatus=#{sendstatus},
+			</if>
+			<if test="content!=null and content!=''">
+				content = #{content},
+			</if>
+			<if test="createtime!=null and createtime!=''">
+				createtime = #{createtime},
+			</if>
+		</trim>
+		where id = #{id}
+	</update>
+	<select id="findById" resultType="com.iterms.been.Tb_message">
+		select
+		<include refid="con"></include>
+		from tb_message where id=#{id}
+	</select>
+	<select id="getMessages" resultType="com.iterms.been.Tb_message">
+		select
+		<include refid="con"></include>
+		from tb_message where 1=1
+		<if test="tb_message.id!=null and tb_message.id!=0">
+			and id=#{tb_message.id}
+		</if>
+		<if test="tb_message.sender!=null and tb_message.sender!=''">
+			and sender=#{tb_message.sender}
+		</if>
+		<if test="tb_message.receiver!=null and tb_message.receiver!=''">
+			and receiver=#{tb_message.receiver}
+		</if>
+		<if test="tb_message.title!=null and tb_message.title!=''">
+			and title=#{tb_message.title}
+		</if>
+		<if test="tb_message.content!=null and tb_message.content!=''">
+			and content=#{tb_message.content}
+		</if>
+		<if test="tb_message.status!=null and tb_message.status!=''">
+			and status=#{tb_message.status}
+		</if>
+		<if test="tb_message.sendstatus!=null and tb_message.sendstatus!=''">
+			and sendstatus=#{tb_message.sendstatus}
+		</if>
+		<if test="tb_message.createtime!=null and tb_message.createtime!=''">
+			and createtime=#{tb_message.createtime}
+		</if>
+			order by createtime desc
+		<if test="pm.startIndex!=null and  pm.currentPage!=null">
+			limit #{pm.startIndex},#{pm.pageSize}
+		</if>
+		
+	</select>
+	
+	<select id="getCount" resultType="java.lang.Integer">
+		select count(id) from tb_message where 1=1
+		<if test="id!=null and id!=0">
+			and id=#{id}
+		</if>
+		<if test="sender!=null and sender!=''">
+			and sender=#{sender}
+		</if>
+		<if test="receiver!=null and receiver!=''">
+			and receiver=#{receiver}
+		</if>
+		<if test="title!=null and title!=''">
+			and title=#{title}
+		</if>
+		<if test="content!=null and content!=''">
+			and content=#{content}
+		</if>
+		<if test="status!=null and status!=''">
+			and status=#{status}
+		</if>
+		<if test="sendstatus!=null and sendstatus!=''">
+			and sendstatus=#{sendstatus}
+		</if>
+		<if test="createtime!=null and createtime!=''">
+			and createtime=#{createtime}
+		</if>
+	</select>
+</mapper>

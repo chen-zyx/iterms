@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iterms.dao.Tb_contentDao">
+<sql id="con">
+		tb_content.id,tb_content.cname,tb_content.xname,tb_content.cfile 
+	</sql>
+	<!-- 根据id获取对象 -->
+	<select id="getById" parameterType="Integer" resultType="com.iterms.been.Tb_content">
+		select <include refid="con"></include> from tb_content where  tb_content.id=#{id} 
+	</select>
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.iterms.been.Tb_content">
+		insert into tb_content 
+			<trim prefix="(" suffix=")" suffixOverrides=","> 
+				<if test="id!=null and id!=0">id,</if> 
+				<if test="xname!=null and xname!=''">xname,</if> 
+				<if test="cname!=null and cname!=''">cname,</if>
+				<if test="cfile!=null and cfile!=''">cfile,</if>
+			</trim> 
+		values 
+			<trim prefix="(" suffix=")" suffixOverrides=","> 
+								<if test="id!=null and id!=0">#{id},</if> 
+				<if test="xname!=null and xname!=''">#{xname},</if> 
+				<if test="cname!=null and cname!=''">#{cname},</if>
+				<if test="cfile!=null and cfile!=''">#{cfile},</if> 
+			</trim> 
+	</insert>
+	<!-- 删除 -->
+	<delete id="delete" parameterType="com.iterms.been.Tb_content">
+		delete from tb_content where id=#{id}
+	</delete>
+	<!-- 根据不同条件，获取信息 -->
+	<select id="getPage" resultType="com.iterms.been.Tb_content">
+		select <include refid="con"></include> from tb_content where 1=1 
+		<if test="id!=null and id!=0">
+			and id=#{id} 
+		</if>
+		<if test="xname!=null and xname!=''">
+			and xname like "%"#{xname}"%" 
+		</if>
+		<if test="cname!=null and cname!=''">
+			and cname like "%"#{cname}"%" 
+		</if>
+		<if test="cfile!=null and cfile!=''">
+			and cfile like "%"#{cfile}"%" 
+		</if>
+		<if test="sindex!=null and scount!=null">
+			limit #{sindex},#{scount}
+		</if>
+	</select>
+	<!-- 获取总条数 -->
+	<select id="getAllCount" resultType="int">
+		select count(tb_content.id) from tb_content where 1=1 
+		<if test="id!=null and id!=0">
+			and id=#{id} 
+		</if>
+		<if test="xname!=null and xname!=''">
+			and xname like "%"#{xname}"%" 
+		</if>
+		<if test="cname!=null and cname!=''">
+			and cname like "%"#{cname}"%" 
+		</if>
+		<if test="cfile!=null and cfile!=''">
+			and cfile like "%"#{cfile}"%" 
+		</if>
+		<if test="sindex!=null and scount!=null">
+			limit #{sindex},#{scount}
+		</if>
+	</select>
+</mapper>

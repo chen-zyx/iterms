@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iterms.dao.Tb_tasktimeDao">
+<sql id="con" >
+tb_tasktime.id, tb_tasktime.pnumber, tb_tasktime.tname, tb_tasktime.sstime, tb_tasktime.srtime,tb_tasktime.ostime,
+tb_tasktime.ortime,tb_tasktime.shour, tb_tasktime.rhour,tb_tasktime.sminus,
+tb_tasktime.rminus,tb_tasktime.tb_task_id,tb_task.taskname,tb_exceldata.project,tb_exceldata.name
+</sql>
+
+<!-- 根据id获取对象 -->
+	<select id="getById" parameterType="Integer" resultType="com.iterms.been.Tb_tasktime">
+		select <include refid="con"></include> from tb_tasktime , tb_task,tb_exceldata where  tb_tasktime.id=#{id}  and tb_tasktime.tb_task_id=tb_task.id and tb_tasktime.tb_node_id=tb_exceldata.id
+	</select>
+
+<!-- 修改 -->
+	<update id="update" parameterType="com.iterms.been.Tb_tasktime">
+		update tb_tasktime set 
+			<trim suffixOverrides=","> 
+				<if test="id!=null and id!=0"> 
+					id = #{id}, 
+				</if> 
+				<if test="tname!=null and tname!=''"> 
+					tname = #{tname}, 
+				</if> 
+				<if test="pnumber!=null and pnumber!=0"> 
+					pnumber = #{pnumber}, 
+				</if>
+				<if test="shour!=null and shour!=0"> 
+					shour = #{shour}, 
+				</if>
+				<if test="rhour!=null and rhour!=0"> 
+					rhour = #{rhour}, 
+				</if>
+				<if test="sminus!=null and sminus!=0"> 
+					sminus = #{sminus}, 
+				</if>
+				<if test="rminus!=null and rminus!=0"> 
+					rminus = #{rminus}, 
+				</if> 
+				
+				<if test="srtime!=null and srtime!=''"> 
+					srtime = #{srtime}, 
+				</if> 
+				<if test="sstime!=null and sstime!=''"> 
+					sstime = #{sstime}, 
+				</if> 
+				<if test="ostime!=null and ostime!=''"> 
+					ostime = #{ostime}, 
+				</if> 
+				<if test="ortime!=null and ortime!=''"> 
+					ortime = #{ortime}, 
+				</if> 
+				
+				<if test="tb_task_id!=null and tb_task_id!=0"> 
+					tb_task_id = #{tb_task_id}, 
+				</if> 
+			</trim> 
+		where id = #{id}  
+	</update>
+	
+	
+	<insert id="inserttask1" parameterType="com.iterms.been.Tb_tasktime">
+		insert into tb_tasktime
+			<trim prefix="(" suffix=")" suffixOverrides=","> 
+				<if test="preprocess!=null and preprocess!=''">tname,</if>
+				
+				   
+				<if test="tb_task_id!=null and tb_task_id!=0">tb_task_id,</if> 
+			  <if test="tb_node_id!=null and tb_node_id!=0">tb_node_id,</if>
+			</trim> 
+		values 
+			<trim prefix="(" suffix=")" suffixOverrides=","> 
+				<if test="preprocess!=null and preprocess!=''">#{preprocess},</if> 
+				
+				<if test="tb_task_id!=null and tb_task_id!=0">#{tb_task_id},</if>
+				 <if test="tb_node_id!=null and tb_node_id!=0">#{tb_node_id},</if>
+			</trim> 
+			<selectKey resultType="java.lang.Integer" order="AFTER"
+	            keyProperty="id">
+	            SELECT LAST_INSERT_ID()
+	         </selectKey>
+	</insert>
+	
+	<insert id="inserttask2" parameterType="com.iterms.been.Tb_tasktime">
+		insert into tb_tasktime
+			<trim prefix="(" suffix=")" suffixOverrides=","> 
+				<if test="calcuv1!=null and calcuv1!=''">tname,</if>
+				
+				   
+				<if test="tb_task_id!=null and tb_task_id!=0">tb_task_id,</if> 
+			  <if test="tb_node_id!=null and tb_node_id!=0">tb_node_id,</if>
+			</trim> 
+		values 
+			<trim prefix="(" suffix=")" suffixOverrides=","> 
+				<if test="calcuv1!=null and calcuv1!=''">#{calcuv1},</if> 
+				
+				<if test="tb_task_id!=null and tb_task_id!=0">#{tb_task_id},</if>
+				 <if test="tb_node_id!=null and tb_node_id!=0">#{tb_node_id},</if>
+			</trim> 
+			<selectKey resultType="java.lang.Integer" order="AFTER"
+	            keyProperty="id">
+	            SELECT LAST_INSERT_ID()
+	         </selectKey>
+	</insert>
+	
+	<insert id="inserttask3" parameterType="com.iterms.been.Tb_tasktime">
+		insert into tb_tasktime
+			<trim prefix="(" suffix=")" suffixOverrides=","> 
+				<if test="calcuv2!=null and calcuv2!=''">tname,</if>
+				
+				   
+				<if test="tb_task_id!=null and tb_task_id!=0">tb_task_id,</if> 
+			  <if test="tb_node_id!=null and tb_node_id!=0">tb_node_id,</if>
+			</trim> 
+		values 
+			<trim prefix="(" suffix=")" suffixOverrides=","> 
+				
+				<if test="calcuv2!=null and calcuv2!=''">#{calcuv2},</if> 
+				
+				<if test="tb_task_id!=null and tb_task_id!=0">#{tb_task_id},</if>
+				 <if test="tb_node_id!=null and tb_node_id!=0">#{tb_node_id},</if>
+			</trim> 
+			<selectKey resultType="java.lang.Integer" order="AFTER"
+	            keyProperty="id">
+	            SELECT LAST_INSERT_ID()
+	         </selectKey>
+	</insert>
+	
+	<insert id="inserttask4" parameterType="com.iterms.been.Tb_tasktime">
+		insert into tb_tasktime
+			<trim prefix="(" suffix=")" suffixOverrides=","> 
+				<if test="report!=null and report!=''">tname,</if>
+				
+				   
+				<if test="tb_task_id!=null and tb_task_id!=0">tb_task_id,</if> 
+			  <if test="tb_node_id!=null and tb_node_id!=0">tb_node_id,</if>
+			</trim> 
+		values 
+			<trim prefix="(" suffix=")" suffixOverrides=","> 
+				<if test="report!=null and report!=''">#{report},</if> 
+				
+				<if test="tb_task_id!=null and tb_task_id!=0">#{tb_task_id},</if>
+				 <if test="tb_node_id!=null and tb_node_id!=0">#{tb_node_id},</if>
+			</trim> 
+			<selectKey resultType="java.lang.Integer" order="AFTER"
+	            keyProperty="id">
+	            SELECT LAST_INSERT_ID()
+	         </selectKey>
+	</insert>
+	
+	
+	
+	<!-- 删除 -->
+	<delete id="delete" parameterType="com.iterms.been.Tb_tasktime">
+		delete from tb_tasktime where id=#{id}
+	</delete>
+	
+	<!-- 根据不同条件，获取信息 -->
+	<select id="getPage" resultType="com.iterms.been.Tb_tasktime">
+		select <include refid="con"></include> from tb_tasktime,tb_task,tb_exceldata where 1=1  and tb_tasktime.tb_task_id=tb_task.id and tb_tasktime.tb_node_id=tb_exceldata.id
+		<if test="id!=null and id!=0">
+			and id=#{id} 
+		</if>
+		<if test="tname!=null and tname!=''">
+			and tname like "%"#{tname}"%" 
+		</if>
+		
+		<if test="pnumber!=null and pnumber!=0">
+			and pnumber=#{pnumber}
+		</if>
+		<if test="sstime!=null and sstime!=''">
+			and sstime like "%"#{sstime}"%" 
+		</if>
+		<if test="ostime!=null and ostime!=''">
+			and ostime like "%"#{ostime}"%" 
+		</if>
+		<if test="srtime!=null and srtime!=''">
+			and srtime like "%"#{srtime}"%" 
+		</if>
+		<if test="ortime!=null and ortime!=''">
+			and ortime like "%"#{ortime}"%" 
+		</if>
+		
+		<if test="tb_task_id!=null and tb_task_id!=0">
+			and tb_task_id=#{tb_task_id} 
+		</if>
+		<if test="sindex!=null and scount!=null">
+			limit #{sindex},#{scount}
+		</if>
+	</select>
+	
+	<select id="getAllCount" resultType="int">
+		select count(tb_tasktime.id) from tb_tasktime,tb_task,tb_exceldata where 1=1  and tb_tasktime.tb_task_id=tb_task.id and tb_tasktime.tb_node_id=tb_exceldata.id
+		<if test="id!=null and id!=0">
+			and id=#{id} 
+		</if>
+		<if test="tname!=null and tname!=''">
+			and tname like "%"#{tname}"%" 
+		</if>
+		
+		<if test="pnumber!=null and pnumber!=0">
+			and pnumber=#{pnumber}
+		</if>
+		<if test="sstime!=null and sstime!=''">
+			and sstime like "%"#{sstime}"%" 
+		</if>
+		<if test="ostime!=null and ostime!=''">
+			and ostime like "%"#{ostime}"%" 
+		</if>
+		<if test="srtime!=null and srtime!=''">
+			and srtime like "%"#{srtime}"%" 
+		</if>
+		<if test="ortime!=null and ortime!=''">
+			and ortime like "%"#{ortime}"%" 
+		</if>
+		
+		<if test="tb_task_id!=null and tb_task_id!=0">
+			and tb_task_id=#{tb_task_id} 
+		</if>
+	</select>
+</mapper>

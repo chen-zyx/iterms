@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iterms.dao.Tb_taskDao">
+	<sql id="con">
+		tb_task.id,tb_task.taskname,tb_task.person,tb_task.situ,tb_task.starttime,tb_task.overtime,tb_task.tb_node_id,tb_exceldata.project,tb_exceldata.name,tb_exceldata.wochestr
+		
+	</sql>
+	<!-- 根据id获取对象 -->
+	<select id="getById" parameterType="Integer" resultType="com.iterms.been.Tb_task">
+		select <include refid="con"></include> from tb_exceldata , tb_task where  tb_task.id=#{id}  and tb_task.tb_node_id=tb_exceldata.id 
+	</select>
+	<!-- 根据项目id获取对象 -->
+	<select id="getBynodeId" parameterType="Integer" resultType="com.iterms.been.Tb_task">
+		select <include refid="con"></include> from tb_task where  tb_task.tb_node_id=#{tb_node_id}    
+	</select>
+	
+	<!-- 修改 -->
+	<update id="update" parameterType="com.iterms.been.Tb_task">
+		update tb_task set 
+			<trim suffixOverrides=","> 
+				<if test="id!=null and id!=0"> 
+					id = #{id}, 
+				</if> 
+				<if test="taskname!=null and taskname!=''"> 
+					taskname = #{taskname}, 
+				</if> 
+				<if test="person!=null and person!=''"> 
+					person = #{person}, 
+				</if> 
+				
+				<if test="situ!=null and situ!=''"> 
+					situ = #{situ}, 
+				</if> 
+				<if test="starttime!=null and starttime!=''"> 
+					starttime = #{starttime}, 
+				</if> 
+				<if test="overtime!=null and overtime!=''"> 
+					overtime = #{overtime}, 
+				</if> 
+				
+				<if test="tb_node_id!=null and tb_node_id!=0"> 
+					tb_node_id = #{tb_node_id}, 
+				</if> 
+			</trim> 
+		where id = #{id}  
+	</update>
+	
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.iterms.been.Tb_task">
+		insert into tb_task
+			<trim prefix="(" suffix=")" suffixOverrides=","> 
+				<if test="id!=null and id!=0">id,</if> 
+				<if test="taskname!=null and taskname!=''">taskname,</if>
+				<if test="situ!=null and situ!=''">situ,</if>
+				
+				<if test="person!=null and person!=''">person,</if>
+				<if test="starttime!=null and starttime!=''">starttime,</if>
+				<if test="overtime!=null and overtime!=''">overtime,</if>
+				   
+				<if test="tb_node_id!=null and tb_node_id!=0">tb_node_id,</if> 
+			  
+			</trim> 
+		values 
+			<trim prefix="(" suffix=")" suffixOverrides=","> 
+				<if test="id!=null and id!=0">#{id},</if> 
+				<if test="taskname!=null and taskname!=''">#{taskname},</if> 
+				<if test="situ!=null and situ!=''">#{situ},</if>  
+				
+				<if test="person!=null and person!=''">#{person},</if>  
+				<if test="starttime!=null and starttime!=''">#{starttime},</if>  
+				<if test="overtime!=null and overtime!=''">#{overtime},</if>  
+				
+				<if test="tb_node_id!=null and tb_node_id!=0">#{tb_node_id},</if>
+				 
+			</trim> 
+			<selectKey resultType="java.lang.Integer" order="AFTER"
+	            keyProperty="id">
+	            SELECT LAST_INSERT_ID()
+	         </selectKey>
+	</insert>
+	
+	
+	
+	<update id="updateips" parameterType="com.iterms.been.Tb_task">
+		update tb_exceldata set 
+			<trim suffixOverrides=","> 
+				 
+				 <if test="ips!=null and ips!=0"> 
+					ips = #{ips}, 
+				</if> 
+				<if test="ipssitu!=null and ipssitu!=''"> 
+					ipssitu = #{ipssitu}, 
+				</if>
+				<if test="simuflag!=null "> 
+					simuflag = true, 
+				</if> 
+			</trim> 
+		where id = #{tb_node_id}  
+	</update>
+	
+	<update id="updateaku" parameterType="com.iterms.been.Tb_task">
+		update tb_exceldata set 
+			<trim suffixOverrides=","> 
+				 
+				 <if test="aku!=null and aku!=0"> 
+					aku = #{aku}, 
+				</if> 
+				<if test="akusitu!=null and akusitu!=''"> 
+					akusitu = #{akusitu}, 
+				</if> 
+				<if test="simuflag!=null "> 
+					simuflag = true, 
+				</if> 
+			</trim> 
+		where id = #{tb_node_id}  
+	</update>
+	
+	<update id="updatebau" parameterType="com.iterms.been.Tb_task">
+		update tb_exceldata set 
+			<trim suffixOverrides=","> 
+				 
+				 <if test="bau!=null and bau!=0"> 
+					bau = #{bau}, 
+				</if> 
+				<if test="bausitu!=null and bausitu!=''"> 
+					bausitu = #{bausitu}, 
+				</if> 
+				<if test="simuflag!=null "> 
+					simuflag = true, 
+				</if> 
+			</trim> 
+		where id = #{tb_node_id}  
+	</update>
+	
+	<update id="updatelas" parameterType="com.iterms.been.Tb_task">
+		update tb_exceldata set 
+			<trim suffixOverrides=","> 
+				 
+				 <if test="las!=null and las!=0"> 
+					las = #{las}, 
+				</if>
+				 <if test="lassitu!=null and lassitu!=''"> 
+					lassitu = #{lassitu}, 
+				</if> 
+				<if test="simuflag!=null "> 
+					simuflag = true, 
+				</if> 
+			</trim> 
+		where id = #{tb_node_id}  
+	</update>
+	
+	<update id="updateboden" parameterType="com.iterms.been.Tb_task">
+		update tb_exceldata set 
+			<trim suffixOverrides=","> 
+				 
+				 <if test="boden!=null and boden!=0"> 
+					boden = #{boden}, 
+				</if> 
+				<if test="bodensitu!=null and bodensitu!=''"> 
+					bodensitu = #{bodensitu}, 
+				</if> 
+				<if test="simuflag!=null "> 
+					simuflag = true, 
+				</if> 
+			</trim> 
+		where id = #{tb_node_id}  
+	</update>
+	
+	<update id="updatewas" parameterType="com.iterms.been.Tb_task">
+		update tb_exceldata set 
+			<trim suffixOverrides=","> 
+				 
+				 <if test="was!=null and was!=0"> 
+					was = #{was}, 
+				</if> 
+				<if test="wassitu!=null and wassitu!=''"> 
+					wassitu = #{wassitu}, 
+				</if> 
+				<if test="simuflag!=null "> 
+					simuflag = true, 
+				</if> 
+			</trim> 
+		where id = #{tb_node_id}  
+	</update>
+	
+	<update id="updatekla" parameterType="com.iterms.been.Tb_task">
+		update tb_exceldata set 
+			<trim suffixOverrides=","> 
+				 
+				 <if test="kla!=null and kla!=0"> 
+					kla = #{kla}, 
+				</if> 
+				<if test="klasitu!=null and klasitu!=''"> 
+					klasitu = #{klasitu}, 
+				</if>
+				<if test="simuflag!=null "> 
+					simuflag = true, 
+				</if> 
+			</trim> 
+		where id = #{tb_node_id}  
+	</update>
+	
+	<update id="updatekaro" parameterType="com.iterms.been.Tb_task">
+		update tb_exceldata set 
+			<trim suffixOverrides=","> 
+				 
+				 <if test="karo!=null and karo!=0"> 
+					karo = #{karo}, 
+				</if> 
+				<if test="karositu!=null and karositu!=''"> 
+					karositu = #{karositu}, 
+				</if> 
+				<if test="simuflag!=null "> 
+					simuflag = true, 
+				</if> 
+			</trim> 
+		where id = #{tb_node_id}  
+	</update>
+	
+	
+	
+	<!-- 删除 -->
+	<delete id="delete" parameterType="com.iterms.been.Tb_task">
+		delete from tb_task where id=#{id}
+	</delete>
+	
+	<!-- 根据不同条件，获取信息 -->
+	<select id="getPage" resultType="com.iterms.been.Tb_task">
+		select <include refid="con"></include> from tb_exceldata,tb_task where 1=1  and tb_task.tb_node_id=tb_exceldata.id 
+		<if test="id!=null and id!=0">
+			and id=#{id} 
+		</if>
+		<if test="taskname!=null and taskname!=''">
+			and taskname like "%"#{taskname}"%" 
+		</if>
+		<if test="situ!=null and situ!=''">
+			and situ like "%"#{situ}"%" 
+		</if>
+		
+		<if test="person!=null and person!=''">
+			and person like "%"#{person}"%" 
+		</if>
+		<if test="starttime!=null and starttime!=''">
+			and starttime like "%"#{starttime}"%" 
+		</if>
+		<if test="overtime!=null and overtime!=''">
+			and overtime like "%"#{overtime}"%" 
+		</if>
+		
+		<if test="tb_node_id!=null and tb_node_id!=0">
+			and tb_node_id=#{tb_node_id} 
+		</if>
+		<if test="sindex!=null and scount!=null">
+			limit #{sindex},#{scount}
+		</if>
+	</select>
+	
+	<!-- 获取总条数 -->
+	<select id="getAllCount" resultType="int">
+		select count(tb_task.id) from tb_exceldata,tb_task where 1=1  and tb_task.tb_node_id=tb_exceldata.id  
+		<if test="id!=null and id!=0">
+			and id=#{id} 
+		</if>
+		<if test="taskname!=null and taskname!=''">
+			and taskname like "%"#{taskname}"%" 
+		</if>
+		<if test="situ!=null and situ!=''">
+			and situ like "%"#{situ}"%" 
+		</if>
+		
+		<if test="person!=null and person!=''">
+			and person like "%"#{person}"%" 
+		</if>
+		<if test="starttime!=null and starttime!=''">
+			and starttime like "%"#{starttime}"%" 
+		</if>
+		<if test="overtime!=null and overtime!=''">
+			and overtime like "%"#{overtime}"%" 
+		</if>
+		
+		<if test="tb_node_id!=null and tb_node_id!=0">
+			and tb_node_id=#{tb_node_id} 
+		</if>
+	</select>
+	
+	</mapper>

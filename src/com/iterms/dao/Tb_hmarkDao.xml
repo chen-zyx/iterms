@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iterms.dao.Tb_hmarkDao">
+	<sql id="con">
+		tb_hmark.id,tb_hmark.tb_model_id,tb_hmark.tb_users_id,hflag,ipaddr,htime,itname,mname,uno,uname   
+	</sql>
+	<!-- 根据id获取对象 -->
+	<select id="getById" parameterType="Integer" resultType="com.iterms.been.Tb_hmark">
+		select <include refid="con"></include> from tb_hmark,tb_users,tb_model,tb_iterms where  tb_hmark.id=#{id}  and tb_hmark.tb_users_id=tb_users.id and tb_model.id=tb_hmark.tb_model_id and tb_model.tb_iterms_id=tb_iterms.id  
+	</select>
+	<!-- 修改 -->
+	<update id="update" parameterType="com.iterms.been.Tb_hmark">
+		update tb_hmark set 
+			<trim suffixOverrides=","> 
+				<if test="id!=null and id!=0"> 
+					id = #{id}, 
+				</if> 
+				<if test="tb_model_id!=null and tb_model_id!=0"> 
+					tb_model_id = #{tb_model_id}, 
+				</if> 
+				<if test="tb_users_id!=null and tb_users_id!=0"> 
+					tb_users_id = #{tb_users_id}, 
+				</if> 
+				<if test="hflag!=null and hflag!=''"> 
+					hflag = #{hflag}, 
+				</if> 
+				<if test="ipaddr!=null and ipaddr!=''"> 
+					ipaddr = #{ipaddr}, 
+				</if> 
+				<if test="htime!=null and htime!=''"> 
+					htime = #{htime}, 
+				</if> 
+			</trim> 
+		where id = #{id}  
+	</update>
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.iterms.been.Tb_hmark">
+		insert into tb_hmark 
+			<trim prefix="(" suffix=")" suffixOverrides=","> 
+				<if test="id!=null and id!=0">id,</if> 
+				<if test="tb_model_id!=null and tb_model_id!=0">tb_model_id,</if> 
+				<if test="tb_users_id!=null and tb_users_id!=0">tb_users_id,</if> 
+				<if test="hflag!=null and hflag!=''">hflag,</if> 
+				<if test="ipaddr!=null and ipaddr!=''">ipaddr,</if> 
+				<if test="htime!=null and htime!=''">htime,</if> 
+			</trim> 
+		values 
+			<trim prefix="(" suffix=")" suffixOverrides=","> 
+								<if test="id!=null and id!=0">#{id},</if> 
+				<if test="tb_model_id!=null and tb_model_id!=0">#{tb_model_id},</if> 
+				<if test="tb_users_id!=null and tb_users_id!=0">#{tb_users_id},</if> 
+				<if test="hflag!=null and hflag!=''">#{hflag},</if> 
+				<if test="ipaddr!=null and ipaddr!=''">#{ipaddr},</if> 
+				<if test="htime!=null and htime!=''">#{htime},</if> 
+ 
+			</trim> 
+	</insert>
+	<!-- 删除 -->
+	<delete id="delete" parameterType="com.iterms.been.Tb_hmark">
+		delete from tb_hmark where id=#{id}
+	</delete>
+	<!-- 根据不同条件，获取信息 -->
+	<select id="getPage" resultType="com.iterms.been.Tb_hmark">
+		select <include refid="con"></include> from tb_hmark,tb_users,tb_model,tb_iterms where tb_hmark.tb_users_id=tb_users.id and tb_model.id=tb_hmark.tb_model_id and tb_model.tb_iterms_id=tb_iterms.id  
+		<if test="id!=null and id!=0">
+			and id=#{id} 
+		</if>
+		<if test="tb_model_id!=null and tb_model_id!=0">
+			and tb_model_id=#{tb_model_id} 
+		</if>
+		<if test="tb_iterms_id!=null and tb_iterms_id!=0">
+			and tb_iterms_id=#{tb_iterms_id} 
+		</if>
+		<if test="tb_users_id!=null and tb_users_id!=0">
+			and tb_users_id=#{tb_users_id} 
+		</if>
+		<if test="hflag!=null and hflag!=''">
+			and hflag like "%"#{hflag}"%" 
+		</if>
+		<if test="ipaddr!=null and ipaddr!=''">
+			and ipaddr like "%"#{ipaddr}"%" 
+		</if>
+		<if test="htime!=null and htime!=''">
+			and htime like "%"#{htime}"%" 
+		</if>
+		<if test="sindex!=null and scount!=null">
+			limit #{sindex},#{scount}
+		</if>
+	</select>
+	<!-- 获取总条数 -->
+	<select id="getAllCount" resultType="int">
+		select count(tb_hmark.id) from tb_hmark,tb_users,tb_model,tb_iterms where tb_hmark.tb_users_id=tb_users.id and tb_model.id=tb_hmark.tb_model_id and tb_model.tb_iterms_id=tb_iterms.id  
+		<if test="id!=null and id!=0">
+			and id=#{id} 
+		</if>
+		<if test="tb_model_id!=null and tb_model_id!=0">
+			and tb_model_id=#{tb_model_id} 
+		</if>
+		<if test="tb_iterms_id!=null and tb_iterms_id!=0">
+			and tb_iterms_id=#{tb_iterms_id} 
+		</if>
+		<if test="tb_users_id!=null and tb_users_id!=0">
+			and tb_users_id=#{tb_users_id} 
+		</if>
+		<if test="hflag!=null and hflag!=''">
+			and hflag like "%"#{hflag}"%" 
+		</if>
+		<if test="ipaddr!=null and ipaddr!=''">
+			and ipaddr like "%"#{ipaddr}"%" 
+		</if>
+		<if test="htime!=null and htime!=''">
+			and htime like "%"#{htime}"%" 
+		</if>
+	</select>
+</mapper>

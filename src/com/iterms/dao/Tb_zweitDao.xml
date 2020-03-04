@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iterms.dao.Tb_zweitDao">
+	<sql id="con">
+		tb_zweit.id,tb_zweit.zweiterst,tb_zweit.zweitname 
+	</sql>
+	<!-- 根据id获取对象 -->
+	<select id="getById" parameterType="Integer" resultType="com.iterms.been.Tb_zweit">
+		select <include refid="con"></include> from tb_zweit where  tb_zweit.id=#{id} 
+	</select>
+	<!-- 根据不同条件，获取信息 -->
+	<select id="getPage" resultType="com.iterms.been.Tb_zweit">
+		select <include refid="con"></include> from tb_zweit where 1=1 
+		<if test="id!=null and id!=0">
+			and id=#{id} 
+		</if>
+		<if test="zweitname!=null and zweitname!=''">
+			and zweitname like "%"#{zweitname}"%" 
+		</if>
+		<if test="zweiterst!=null and zweiterst!=''">
+			and zweiterst like "%"#{zweiterst}"%" 
+		</if>
+		<if test="sindex!=null and scount!=null">
+			limit #{sindex},#{scount}
+		</if>
+	</select>
+	<!-- 获取总条数 -->
+	<select id="getAllCount" resultType="int">
+		select count(tb_zweit.id) from tb_zweit where 1=1 
+		<if test="id!=null and id!=0">
+			and id=#{id} 
+		</if>
+		<if test="zweitname!=null and zweitname!=''">
+			and zweitname like "%"#{zweitname}"%" 
+		</if>
+		<if test="zweiterst!=null and zweiterst!=''">
+			and zweiterst like "%"#{zweiterst}"%" 
+		</if>
+		<if test="sindex!=null and scount!=null">
+			limit #{sindex},#{scount}
+		</if>
+	</select>
+</mapper>
