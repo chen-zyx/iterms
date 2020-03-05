@@ -108,6 +108,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<c:if test="${not empty myinfo && myinfo.utype=='管理员' }">
 											<input class="btn btn-warning" type="button" onclick="delsbt();" value="删除"/>
 										</c:if>
+										<a class="btn btn-warning" style="margin-left: 30px;" href="<%=basePath%>tb_tasktime/tb_tasktime_show" target="subfrm">工时显示</a>
 										<a class="btn btn-warning" style="margin-left: 30px;" href="<%=basePath%>tb_tasktime/tb_tasktime_showmore" target="subfrm">多项目工时显示</a>
 										<a class="btn btn-warning" style="margin-left: 30px;" href="<%=basePath%>tb_tasktime/tb_tasktime_totasksbarhour" target="subfrm">项目各任务工时显示</a>
 									</div>

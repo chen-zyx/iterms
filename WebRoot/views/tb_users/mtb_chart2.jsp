@@ -491,8 +491,8 @@ table.imagetable td {
 		}];
 		var taskhour=[{"rhour":6,"tname":"preprocess"},{"rhour":8,"tname":"calcuv1"},{"rhour":10,"tname":"calcuv2"},{"rhour":16,"tname":"report"}];
 		console.log(tasktime);
-		var name = tasktime[0].taskname;
-		$('.h').html(name + "实际工时");
+		var pname = tasktime[0].taskname;
+		$('.h').html(pname + "实际工时");
 		//任务名称数组
 		var taskname = [];
 		//实际工时
@@ -535,11 +535,11 @@ table.imagetable td {
 		//指定图表的配置项和数据
 		option1 = {
 			title : [ {
-				text : '1、' + name + '各任务工时(数值)',
+				text : '1、' + pname + '各任务工时(数值)',
 				left : '18%',
 				textAlign : 'center'
 			}, {
-				text : '2、' + name + '各任务工时(百分比)',
+				text : '2、' + pname + '各任务工时(百分比)',
 				left : '50%',
 				textAlign : 'center'
 			},{

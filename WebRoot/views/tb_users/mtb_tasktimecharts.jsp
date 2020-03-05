@@ -21,8 +21,8 @@
 	<script type="text/javascript">
 		var tasktime =<%=session.getAttribute("tasktime")%>;
 		console.log(tasktime);
-		var name = tasktime[0].taskname;
-		$('.h').html(name + "实际工时");
+		var pname = tasktime[0].taskname;
+		$('.h').html(pname + "实际工时");
 		//任务名称数组
 		var taskname = [];
 		//实际工时
@@ -42,11 +42,11 @@
 		//指定图表的配置项和数据
 		option = {
 			title : [ {
-				text : '1、' + name + '各任务工时(百分比)',
+				text : '1、' + pname + '各任务工时(百分比)',
 				left : '25%',
 				textAlign : 'center'
 			}, {
-				text : '2、' + name + '各任务工时(数值)',
+				text : '2、' + pname + '各任务工时(数值)',
 				left : '75%',
 				textAlign : 'center'
 			} ],

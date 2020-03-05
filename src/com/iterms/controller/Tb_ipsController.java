@@ -346,6 +346,12 @@ public class Tb_ipsController {
 	    io.close();
 	}
 	
+	@RequestMapping(value = "/tb_ips_topdfpreview")
+	public String tb_ips_topdfpreview(HttpSession session) {
+		return "../views/tb_users/mtb_pdfpreview";
+	}
+
+	
 	public void gettb_usersPage(HttpSession session,Tb_ips ad,String pnum){
 		//每页显示的条数
 		int scount=10;

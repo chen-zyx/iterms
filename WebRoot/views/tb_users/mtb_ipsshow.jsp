@@ -157,8 +157,8 @@
 						</tr>
 						<br><br>
 						<tr>	
-							<a href="<%=basePath%>tb_ips/tb_ips_download">输出word</a>
-							<a class="a" href="<%=basePath%>tb_ips/tb_ips_download?filename=${ips.ipsfile}">下载</a>
+							<a style="font-size: 20px;margin-left: 30px;" href="<%=basePath%>tb_ips/tb_ips_topdfpreview">PDF预览</a> 
+							<a style="font-size: 20px;margin-left: 150px;" href="<%=basePath%>tb_ips/tb_ips_download?filename=${ips.ipsfile}">下载ips文件</a>
 						</tr>
 						<br><br>
 					</table>

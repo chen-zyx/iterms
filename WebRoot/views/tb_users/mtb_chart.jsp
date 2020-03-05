@@ -36,8 +36,7 @@
 	<div> 
 		<input type="button" onclick="pre();" value="上一页"/>
 		<input type="button" onclick="next();" value="下一页"/>
-		<a href="<%=basePath%>tb_tasktime/tb_tasktime_show" target="subfrm">工时显示</a>
-		<a href="<%=basePath%>tb_tasktime/tb_tasktime_tochart2" target="subfrm">Lamando NF</a>
+		<a class="btn btn-warning" style="margin-left: 30px;" href="<%=basePath%>tb_tasktime/tb_tasktime_tochart2" target="subfrm">Lamando NF</a>
 	</div>
 	<script type="text/javascript">
 		var data =

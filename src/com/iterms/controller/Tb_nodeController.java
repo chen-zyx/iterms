@@ -61,8 +61,6 @@ public class Tb_nodeController {
 	@ResponseBody
 	public void tb_users_init(HttpSession session, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		
 		// 把查询信息放入session
 		readExcel(fileName, 4);
 		List<Modell> elist = getList();
